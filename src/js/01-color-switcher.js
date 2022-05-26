@@ -4,7 +4,7 @@ const refs = {
 };
 refs.stopBtn.setAttribute('disabled', 'true');
 
-const SWITCH_INTERVAL = 500;
+const SWITCH_INTERVAL = 1000;
 let bgSwitcherId = null;
 
 refs.startBtn.addEventListener('click', onStartSwitcher);
