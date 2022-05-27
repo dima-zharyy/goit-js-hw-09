@@ -17,7 +17,7 @@ img {
   max-width: 100%;
 }
 
-button[data-start] {
+.controller button[data-start] {
   width: 200px;
   padding: 10px;
   font-size: 24px;
@@ -27,7 +27,7 @@ button[data-start] {
   background-color: tomato;
 }
 
-button[data-start]:disabled {
+.controller button[data-start]:disabled {
   background-color: gray;
   color: darkgray;
 }
@@ -67,4 +67,28 @@ input {
 
 .label {
   font-size: 20px;
+}
+
+.buttons-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.buttons-container button[data-start],
+.buttons-container button[data-stop] {
+  width: 200px;
+  padding: 10px;
+  font-size: 24px;
+  color: white;
+  border-radius: 10px;
+
+  background-color: tomato;
+}
+
+.buttons-container button[data-start]:disabled,
+.buttons-container button[data-stop]:disabled {
+  background-color: gray;
+  color: darkgray;
 }
