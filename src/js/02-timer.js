@@ -2,10 +2,6 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-//
-// ------Решить проблему - создается новый таймер
-//
-
 const refs = {
   startBtn: document.querySelector('[data-start]'),
   days: document.querySelector('[data-days]'),
@@ -35,7 +31,7 @@ const options = {
   },
 };
 
-flatpickr('#datetime-picker', options);
+let instance = flatpickr('#datetime-picker', options);
 
 function enableStartBtn() {
   refs.startBtn.removeAttribute('disabled');
@@ -49,6 +45,7 @@ function onStartTimer() {
   const timer = new Timer({ onTick: updateTimerInterface });
   timer.start();
   disableStartBtn();
+  instance.destroy();
 }
 
 class Timer {
@@ -63,6 +60,7 @@ class Timer {
       const timerInMs = this.deadline - currentTime;
       if (timerInMs <= 0) {
         clearInterval(this.timerId);
+        instance = flatpickr('#datetime-picker', options);
         return;
       }
       const timerData = this.getDeadlineData(timerInMs);
