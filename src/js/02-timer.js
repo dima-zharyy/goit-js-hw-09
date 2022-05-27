@@ -21,7 +21,6 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    // console.log(selectedDates[0]);
     disableStartBtn();
     if (selectedDates[0] < Date.now()) {
       Notify.failure('Please choose a date in the future');
@@ -46,7 +45,6 @@ function onStartTimer() {
   const timer = new Timer({ onTick: updateTimerInterface });
   timer.start();
   disableStartBtn();
-  // console.log(timer);
 }
 
 class Timer {
@@ -55,15 +53,14 @@ class Timer {
     this.deadline = userTimePick;
     this.onTick = onTick;
   }
-  /////////  Решить проблему с минусовым таймером - строка 62//////////////////////////////////////////////
   start() {
     this.timerId = setInterval(() => {
       const currentTime = Date.now();
-      if (currentTime === this.deadline) {
+      const timerInMs = this.deadline - currentTime;
+      if (timerInMs <= 0) {
         clearInterval(this.timerId);
         return;
       }
-      const timerInMs = this.deadline - currentTime;
       const timerData = this.getDeadlineData(timerInMs);
       this.onTick(timerData);
     }, 1000);
